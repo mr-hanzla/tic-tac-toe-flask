@@ -3,23 +3,27 @@
 {% block title %}TicTacToe{% endblock title %}
 
 {% block content %}
-<h1>In da ttt.html file</h1>
+<h1>Tic Tac Toe</h1>
 
 <table>
     {% for i in range(3) %}
         <tr>
             {% for j in range(3) %}
                 <td>
-                    {% if not game.board[i][j] %}
-                        <a href="{{ url_for('move', row=i, col=j) }}">place [{{ game.turn }}]</a>
-                    {% else %}
+                    {% if game.board[i][j] %}
                         {{ game.board[i][j] }}
+                    {% elif not game.winner and not game.board[i][j] %}
+                        <a href="{{ url_for('move', row=i, col=j) }}">place [{{ game.turn }}]</a>
                     {% endif %}
                 </td>
             {% endfor %}
         </tr>
     {% endfor %}
 </table>
+
+{% if game.winner %}
+    <h2>{{ game.winner }} has won the game!</h2>
+{% endif %}
 
 <h3>
     <a href="{{ url_for('clear') }}">Reset Game!</a>
