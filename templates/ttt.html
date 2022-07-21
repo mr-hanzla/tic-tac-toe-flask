@@ -5,4 +5,23 @@
 {% block content %}
 <h1>In da ttt.html file</h1>
 
+<table>
+    {% for i in range(3) %}
+        <tr>
+            {% for j in range(3) %}
+                <td>
+                    {% if not game.board[i][j] %}
+                        <a href="{{ url_for('move', row=i, col=j) }}">place [{{ game.turn }}]</a>
+                    {% else %}
+                        {{ game.board[i][j] }}
+                    {% endif %}
+                </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+
+<h3>
+    <a href="{{ url_for('clear') }}">Reset Game!</a>
+</h3>
 {% endblock content %}
