@@ -1,4 +1,19 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
+import os
+
+app = Flask(__name__)
+app.config.from_mapping(
+    SECRET_KEY='dev'
+)
+
+
+@app.route('/ttt')
+def ttt():
+    session.clear()
+    if 'board' not in session:
+        session['board'] = [[None for _ in range(3)] for _ in range(3)]
+    print(f"Board: {session['board']}")
+    return render_template('ttt.html')
 
 if __name__ == '__main__':
-    pass
+    app.run(debug=True)
