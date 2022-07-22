@@ -34,6 +34,15 @@ def col_check(col):
 def is_winner_move(row, col):
     return row_check(row) or col_check(col)
 
+def available_moves():
+    moves = []
+    for i in range(3):
+        for j in range(3):
+            if not session['board'][i][j]:
+                moves.append((i, j))
+    return moves
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -44,11 +53,15 @@ def ttt():
         session['board'] = [[None for _ in range(3)] for _ in range(3)]
         session['turn'] = 'X'
         session['winner'] = None
+        session['gameover'] = False
+
+    show(f'Moves: {available_moves()}')
 
     return render_template('ttt.html', game={
         'board': session['board'],
         'turn': session['turn'],
-        'winner': session['winner']
+        'winner': session['winner'],
+        'gameover': session['gameover']
     })
 
 @app.route('/move/<int:row>/<int:col>')
