@@ -13,3 +13,7 @@ td {
     text-align: center;
     font-size: 30px;
 }
+
+td > a {
+    color: yellow;
+}
