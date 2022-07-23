@@ -13,7 +13,7 @@
                     {% if game.board[i][j] %}
                         {{ game.board[i][j] }}
                     {% elif not game.winner and not game.board[i][j] %}
-                        <a href="{{ url_for('move', row=i, col=j) }}">place [{{ game.turn }}]</a>
+                        <a href="{{ url_for('ttt.move', row=i, col=j) }}">place [{{ game.turn }}]</a>
                     {% endif %}
                 </td>
             {% endfor %}
@@ -26,6 +26,6 @@
 {% endif %}
 
 <h3>
-    <a href="{{ url_for('clear') }}">Reset Game!</a>
+    <a href="{{ url_for('ttt.clear') }}">Reset Game!</a>
 </h3>
 {% endblock content %}
